@@ -31,8 +31,27 @@ $(function () {
     $('.Back_btn').on('click',function(){
         $('.stack_overflow_preview').fadeOut(100)
         $('.form_preview').fadeIn(100)
+        $('.upload_file').fadeOut(100)
     })
-  
+
+    $(".upload_link").on('click',function(){
+        $('.stack_overflow_preview').fadeOut(100)
+        $('.form_preview').fadeOut(100)
+        $('.upload_file').fadeIn(100)
+    })
+
+    $("#upload_voice").on('submit',function (e) {
+        e.preventDefault();
+        voiceToTxt()
+      })
+
+    $("#upload_img").on('submit',function (e) {
+        e.preventDefault();
+        imgToTxt()
+
+ 
+    })
+
 })
 
 function add_selected(txt){
@@ -106,6 +125,7 @@ function publish_perview(){
 
             $('.stack_overflow_preview').fadeIn(100)
             $('.form_preview').fadeOut(100)
+            $('.upload_file').fadeOut(100)
 
             title=$('.title').val()
             body=$('.textarea').val()
@@ -139,4 +159,51 @@ function  publish_post(){
     else{
         $('.card-outline').prepend('<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><h5><i class="icon fa fa-ban"></i> Alert!</h5>you must write a Title and Question(Body) </div>');
     }
+}
+
+
+function voiceToTxt(){
+    var form_data = new FormData($('#upload_voice')[0]);
+        $.ajax({
+            type: 'post',
+            url: 'http://127.0.0.1:9090/api/voice',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                //$('.textarea').data("wysihtml5").editor.setValue(Text)
+                var Text=data["Text"]
+                console.log(Text);
+                $('.textarea', $('.wysihtml5-sandbox').contents()).removeClass('placeholder')
+                $('.textarea', $('.wysihtml5-sandbox').contents()).empty()
+                $('.textarea', $('.wysihtml5-sandbox').contents()).append(Text)
+                $('.stack_overflow_preview').fadeOut(100)
+                $('.form_preview').fadeIn(100)
+                $('.upload_file').fadeOut(100)
+            },
+        });
+}
+
+function imgToTxt(){
+    var form_data = new FormData($('#upload_img')[0]);
+        $.ajax({
+            type: 'post',
+            url: 'http://127.0.0.1:9090/api/img',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                //$('.textarea').data("wysihtml5").editor.setValue(Text)
+                var Text=data["Text"]
+                console.log(Text);
+                $('.textarea', $('.wysihtml5-sandbox').contents()).removeClass('placeholder')
+                $('.textarea', $('.wysihtml5-sandbox').contents()).empty()
+                $('.textarea', $('.wysihtml5-sandbox').contents()).append(Text)
+                $('.stack_overflow_preview').fadeOut(100)
+                $('.form_preview').fadeIn(100)
+                $('.upload_file').fadeOut(100)
+            },
+        });
 }

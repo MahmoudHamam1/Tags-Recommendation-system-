@@ -1,10 +1,11 @@
 import json
+import os , sys
 from flask import Flask,jsonify,request,render_template
 import Classifier as cl
 import FB_Model as fb
+import media as md
 
 # print(fb.test())
-
 # print("Score : " + str(cl.get_score()))
 
 app = Flask(__name__)
@@ -19,6 +20,23 @@ def func():
     res=cl.lr.predict(x)[0]
     Tags=list(fb.get_ferq_with_txt(txt,[res]))
     data={'title':Title,'body':Body,'tags':Tags}
+    return jsonify(data)
+
+@app.route("/api/voice",methods=["POST"])
+def speechToText():
+    file=request.files['file']
+    file.save(os.path.join("/tmp/voice", file.filename))
+    AUDIO_FILE = os.path.join("/tmp/voice", file.filename)
+    data= md.speechToText(AUDIO_FILE)
+    #data={'Text':os.path.join("/tmp/", filename)}
+    return jsonify(data)
+
+@app.route("/api/img",methods=["POST"])
+def imgToText():
+    file=request.files['file']
+    file.save(os.path.join("/tmp/img", file.filename))
+    path = os.path.join("/tmp/img", file.filename)
+    data=md.imgToText(path)
     return jsonify(data)
 
 

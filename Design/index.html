@@ -103,6 +103,17 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link upload_link">
+              <i class="nav-icon nav-icon fa fa-upload"></i>
+              <p>
+                Upload
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+
          </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -131,7 +142,7 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content-header form_preview">
+    <section class="content-header form_preview" >
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row mb-2 ">
@@ -234,7 +245,40 @@
         </div>
         <button class="btn btn-outline-warning Back_btn"><i class="fa fa-arrow-circle-o-left"></i> Back</button>
       </div>
-    </div>
+      </div>
+    </section>
+
+    <section class="content-header upload_file" style="display:none">
+      <div class="container-fluid">
+        <div class="row">
+          <form id="upload_img" class="col-xs-12" method="get" enctype="multipart/form-data">
+           <div class="form-group"> 
+                <label for="file">Select a Image</label>
+                <input name="file" class="form-control" type="file">
+            </div>
+            <fieldset>
+                <button id="upload-file-btn" class="btn btn-outline-success" type="submit">Upload Image</button>
+            </fieldset>
+        </form>
+        </div>
+        <br>
+        <div class="row">
+          <form id="upload_voice"  class="col-xs-12" method="get" enctype="multipart/form-data">
+            <div class="form-group"> 
+                <label for="file">Select a .wav file</label>
+                <input name="file" class="form-control" type="file">
+            </div>
+            <fieldset>
+                <button id="upload-file-btn"  class="btn btn-outline-success" type="submit">Upload voice</button>
+            </fieldset>
+        </form>
+        </div>
+        
+        <div>
+          <br>
+          <button  class="btn btn-outline-warning Back_btn" type="button"><i class="fa fa-arrow-circle-left"></i> Back</button>
+        </div>
+      </div>
     </section>
     </div>
   <!-- /.content-wrapper -->
