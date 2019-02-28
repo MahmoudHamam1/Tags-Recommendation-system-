@@ -5,6 +5,9 @@ from flask import request
 from typing import Optional, Dict, Any, Union
 from flask import jsonify
 import FB_Model as fm
+import os , sys
+import media as md
+
 
 
 from ContentBased import ContentBased
@@ -46,6 +49,25 @@ def getTags():
     }
 
     return jsonify(res)
+
+@app.route("/api/voice",methods=["POST"])
+def speechToText():
+    file=request.files['file']
+    file.save(os.path.join("/tmp/voice", file.filename))
+    AUDIO_FILE = os.path.join("/tmp/voice", file.filename)
+    data= md.speechToText(AUDIO_FILE)
+    #data={'Text':os.path.join("/tmp/", filename)}
+    return jsonify(data)
+
+@app.route("/api/img",methods=["POST"])
+def imgToText():
+    file=request.files['file']
+    file.save(os.path.join("/tmp/img", file.filename))
+    path = os.path.join("/tmp/img", file.filename)
+    data=md.imgToText(path)
+    return jsonify(data)
+
+
 
 #################################### For solving cross ##########################
 @app.after_request
