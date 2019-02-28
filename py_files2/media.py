@@ -15,9 +15,6 @@ def speechToText(AUDIO_FILE):
     return data
 
 def imgToText(path):
-    img = Image.open(path)
-    img = img.convert('RGB')
-    pix = img.load()
     text = pytesseract.image_to_string(Image.open(path))
     data={'Text':text}
     return data
