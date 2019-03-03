@@ -251,27 +251,34 @@
     <section class="content-header upload_file" style="display:none">
       <div class="container-fluid">
         <div class="row">
-          <form id="upload_img" class="col-xs-12" method="get" enctype="multipart/form-data">
+          <form id="upload_img" class="col-md-6" method="get" enctype="multipart/form-data">
            <div class="form-group"> 
                 <label for="file">Select a Image</label>
-                <input name="file" class="form-control" type="file">
+                <input name="file" id="imgInp" class="form-control" type="file">
             </div>
             <fieldset>
                 <button id="upload-file-btn" class="btn btn-outline-success" type="submit">Upload Image</button>
             </fieldset>
         </form>
+        <div class="col-md-6" id="myImage" style="width:200px;height:200px">
+        </div>
+        
+          
         </div>
         <br>
         <div class="row">
-          <form id="upload_voice"  class="col-xs-12" method="get" enctype="multipart/form-data">
+          <form id="upload_voice"  class="col-md-6" method="get" enctype="multipart/form-data">
             <div class="form-group"> 
                 <label for="file">Select a .wav file</label>
-                <input name="file" class="form-control" type="file">
+                <input name="file" id="voiceInp"  class="form-control" type="file">
             </div>
             <fieldset>
                 <button id="upload-file-btn"  class="btn btn-outline-success" type="submit">Upload voice</button>
             </fieldset>
         </form>
+        <div class="col-md-6" id="myVoice">
+          
+        </div>
         </div>
         
         <div>

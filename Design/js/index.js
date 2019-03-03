@@ -52,7 +52,43 @@ $(function () {
  
     })
 
+    $("#imgInp").change(function() {
+        readimg(this);
+      });
+
+      $("#voiceInp").change(function() {
+        readvoice(this);
+      });
 })
+
+function readimg(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('#myImage').html('')
+      $('#myImage').append('<img src="'+e.target.result+'" style="width:100%;height:100%" class=" img-thumbnail"  >');
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+function readvoice(input) {
+    
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+  
+      reader.onload = function(e) {
+        $('#myVoice').html("")
+        $('#myVoice').append(' <audio controls id="myVoice" style="margin-top:20px"><source src="'+e.target.result+'" ></audio>');
+      }
+      reader.readAsDataURL(input.files[0]);
+      $('#myVoice').load()
+    }
+  }
+
 
 function add_selected(txt){
     $('.selected .row').append('<span style="margin:5px" onclick="remove_event(this);" class=" btn btn-'+colors[count%8]+'">'+txt+'</span>');

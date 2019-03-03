@@ -11,7 +11,7 @@ import media as md
 app = Flask(__name__)
 
 @app.route("/api/tags",methods=["GET"])
-def func():
+def get_tags():
     Title=request.args.get('title')
     Body=request.args.get('body')
     t=str(Title) + str(Body)
